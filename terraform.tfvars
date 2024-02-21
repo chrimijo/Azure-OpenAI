@@ -6,7 +6,7 @@
 
 # Application variables value
 AZURE_REGION   = "westeurope"
-AZURE_ENV      = "prod"
+AZURE_ENV      = "dev"
 AZURE_APP_NAME = "conversationel"
 AZURE_DEP      = "AEIS"
 AZURE_PO       = "CJO"

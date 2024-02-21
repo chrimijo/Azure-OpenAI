@@ -15,3 +15,5 @@ resource "azurerm_log_analytics_workspace" "log" {
   internet_query_enabled     = true
   tags                       = var.default_tags
 }
+
+#add query package @chrimijo

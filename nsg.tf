@@ -47,7 +47,7 @@ resource "azurerm_network_security_group" "nsg-apim" {
   }
 
   security_rule {
-    name                       = "Management_Endpoint_https"
+    name                       = "APIManagement_https"
     priority                   = 1002
     direction                  = "Inbound"
     access                     = "Allow"
@@ -95,7 +95,7 @@ resource "azurerm_network_security_group" "nsg-apim" {
   }
 
   security_rule {
-    name                       = "KeyVault_https"
+    name                       = "KeyVault"
     priority                   = 1006
     direction                  = "Outbound"
     access                     = "Allow"
@@ -107,15 +107,27 @@ resource "azurerm_network_security_group" "nsg-apim" {
   }
 
   security_rule {
-    name                       = "KeyVault_1886"
+    name                       = "AzureMonitor_80"
     priority                   = 1007
+    direction                  = "Outbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "80"
+    source_address_prefix      = "VirtualNetwork"
+    destination_address_prefix = "AzureMonitor"
+  }
+  
+  security_rule {
+    name                       = "AzureMonitor_1886"
+    priority                   = 100
     direction                  = "Outbound"
     access                     = "Allow"
     protocol                   = "Tcp"
     source_port_range          = "*"
     destination_port_range     = "1886"
     source_address_prefix      = "VirtualNetwork"
-    destination_address_prefix = "AzureKeyVault"
+    destination_address_prefix = "AzureMonitor"
   }
 
   # rules for windows 11 vm
