@@ -1,11 +1,6 @@
 terraform {
 
-  cloud {
-    organization = "Innovamis"
-    workspaces {
-      name = "cma"
-    }
-  }
+
 
   required_providers {
     azurerm = {
