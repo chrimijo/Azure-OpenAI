@@ -115,7 +115,7 @@ resource "azurerm_network_security_group" "nsg-apim" {
     source_address_prefix      = "VirtualNetwork"
     destination_address_prefix = "AzureMonitor"
   }
-  
+
   security_rule {
     name                       = "AzureMonitor_1886"
     priority                   = 100

@@ -2,7 +2,6 @@
 ######### Build Network #########
 #################################
 
-
 resource "azurerm_network_security_group" "nsg" {
   name                = "${var.AZURE_NSG_PREFIX}-${local.suffix}"
   location            = azurerm_resource_group.rg.location

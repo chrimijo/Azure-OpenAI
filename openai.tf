@@ -13,21 +13,14 @@ resource "azurerm_cognitive_account" "cognitive" {
   kind                          = "OpenAI"
   sku_name                      = "S0"
   public_network_access_enabled = false
-  custom_subdomain_name         = "innovamis-openai"
+  custom_subdomain_name         = "openai-${local.suffix}"
   tags                          = var.default_tags
 }
 
-resource "azurerm_cognitive_deployment" "example" {
-  name                 = "${var.AZURE_CD_PREFIX}-openai-${local.suffix}"
-  cognitive_account_id = azurerm_cognitive_account.cognitive.id
+# Read Data to get the api-key call in apimmng.tf
+data "azurerm_cognitive_account" "cognitive" {
+  name                = "${var.AZURE_CA_PREFIX}-openai-${local.suffix}"
+  resource_group_name = azurerm_resource_group.rg.name
 
-  model {
-    format  = "OpenAI"
-    name    = "gpt-35-turbo"
-    version = "0301"
-  }
-
-  scale {
-    type = "Standard"
-  }
 }
+

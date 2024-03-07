@@ -10,8 +10,8 @@ resource "azurerm_api_management" "apim" {
   name                          = "${var.AZURE_APIM_PREFIX}-${local.suffix}"
   location                      = azurerm_resource_group.rg.location
   resource_group_name           = azurerm_resource_group.rg.name
-  publisher_name                = "INNOVAMIS"
-  publisher_email               = "christian.joseph@innovamis.com"
+  publisher_name                = var.COMPANY
+  publisher_email               = var.COMPANY-EMAIL
   tags                          = var.default_tags
   sku_name                      = "Developer_1"
   public_ip_address_id          = azurerm_public_ip.pip-public.id
@@ -21,21 +21,17 @@ resource "azurerm_api_management" "apim" {
   virtual_network_configuration {
     subnet_id = azurerm_subnet.sub-apim.id
   }
-  depends_on = [azurerm_subnet_network_security_group_association.nsg-asso-apim ]
- }
+  depends_on = [azurerm_subnet_network_security_group_association.nsg-asso-apim]
+}
 
-resource "azurerm_api_management_api" "api-openai" {
-  name                = "${var.AZURE_API_PREFIX}-openai-${local.suffix}"
-  resource_group_name = azurerm_resource_group.rg.location
+# create Named Valu
+resource "azurerm_api_management_named_value" "named-value" {
+  name                = "openai-backend-api-key"
+  resource_group_name = azurerm_resource_group.rg.name
   api_management_name = azurerm_api_management.apim.name
-  revision            = "1"
-  display_name        = "OpenAI"
-  path                = "example"
-  protocols           = ["https"]
-  service_url         = "https://apim-conversationel-prod-weu.azure-api.net"
-  
-  import {
-    content_format = "swagger-link-json"
-    content_value  = "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/cognitiveservices/data-plane/AzureOpenAI/inference/preview/2023-03-15-preview/inference.json"
-    }
- }
+  display_name        = "openai-backend-api-key"
+  secret              = true
+  value               = data.azurerm_cognitive_account.cognitive.primary_access_key
+  depends_on          = [azurerm_cognitive_account.cognitive]
+}
+
