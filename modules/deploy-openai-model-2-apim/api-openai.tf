@@ -50,4 +50,32 @@ resource "azurerm_api_management_subscription" "openai-subscription" {
   api_management_name = var.APIMNGNAME
   product_id          = azurerm_api_management_product.openai-product.id
   display_name        = "openai-subscription-key"
+  allow_tracing = false
+}
+
+resource "azurerm_api_management_api_policy" "api_policy" {
+  api_name            = azurerm_api_management_api.api-model.name
+  api_management_name = var.APIMNGNAME
+  resource_group_name = var.RGNAME
+  
+  xml_content = <<XML
+
+<policies>
+    <inbound>
+        <base />
+        <set-header name="api-key" exists-action="override">
+            <value>{{openai-key}}</value>
+        </set-header>
+    </inbound>
+    <backend>
+        <base />
+    </backend>
+    <outbound>
+        <base />
+    </outbound>
+    <on-error>
+        <base />
+    </on-error>
+</policies>
+XML
 }

@@ -21,6 +21,5 @@ resource "azurerm_cognitive_account" "cognitive" {
 data "azurerm_cognitive_account" "cognitive" {
   name                = "${var.AZURE_CA_PREFIX}-openai-${local.suffix}"
   resource_group_name = azurerm_resource_group.rg.name
-
 }
 
