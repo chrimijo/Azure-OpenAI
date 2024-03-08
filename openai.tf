@@ -1,10 +1,10 @@
-########################################
-######### Build OpenAI Service #########
-########################################
 
-# ref:
-# https://msandbu.org/deploy-azure-openai-using-terraform-with-private-endpoint/
-# https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/cognitive_deployment
+/* Build OpenAI Cognitive Service
+
+ref:
+https://msandbu.org/deploy-azure-openai-using-terraform-with-private-endpoint/
+https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/cognitive_deployment
+ */
 
 resource "azurerm_cognitive_account" "cognitive" {
   name                          = "${var.AZURE_CA_PREFIX}-openai-${local.suffix}"
@@ -15,6 +15,11 @@ resource "azurerm_cognitive_account" "cognitive" {
   public_network_access_enabled = false
   custom_subdomain_name         = "openai-${local.suffix}"
   tags                          = var.default_tags
+
+  network_acls {
+    default_action = "Deny"
+  }
+
 }
 
 # Read Data to get the api-key call in apimmng.tf

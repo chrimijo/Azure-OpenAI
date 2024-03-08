@@ -18,3 +18,9 @@ terraform {
 provider "azurerm" {
   features {}
 }
+
+/* module "deploy-openai-model-2-apim " {
+  source = "./modules/deploy-openai-model-2-apim"
+
+  
+} */
