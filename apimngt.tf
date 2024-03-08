@@ -5,7 +5,6 @@
 #ref
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/api_management
 
-
 resource "azurerm_api_management" "apim" {
   name                          = "${var.AZURE_APIM_PREFIX}-${local.suffix}"
   location                      = azurerm_resource_group.rg.location
@@ -21,17 +20,19 @@ resource "azurerm_api_management" "apim" {
   virtual_network_configuration {
     subnet_id = azurerm_subnet.sub-apim.id
   }
+
+  identity {
+    type = "SystemAssigned"
+
+  }
   depends_on = [azurerm_subnet_network_security_group_association.nsg-asso-apim]
 }
 
-# create Named Valu
-resource "azurerm_api_management_named_value" "named-value" {
-  name                = "openai-backend-api-key"
-  resource_group_name = azurerm_resource_group.rg.name
-  api_management_name = azurerm_api_management.apim.name
-  display_name        = "openai-backend-api-key"
-  secret              = true
-  value               = data.azurerm_cognitive_account.cognitive.primary_access_key
-  depends_on          = [azurerm_cognitive_account.cognitive]
+data "azurerm_subscription" "current" {
 }
 
+resource "azurerm_role_assignment" "role_assignment" {
+  scope                = azurerm_cognitive_account.cognitive.id
+  role_definition_name = "Cognitive Services OpenAI User"
+  principal_id         = azurerm_api_management.apim.identity[0].principal_id
+}

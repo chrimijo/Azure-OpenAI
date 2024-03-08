@@ -7,7 +7,7 @@
   },
   "servers": [
     {
-      "url": "https://apim-daei-di01-rec-openai-frct.azure-api.net"      
+      "url": "https://openai-daei-di01-rec-openai-frct.openai.azure.com/"      
     }
   ],
   "security": [

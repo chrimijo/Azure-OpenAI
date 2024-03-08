@@ -18,8 +18,3 @@ terraform {
 provider "azurerm" {
   features {}
 }
-
-
-resource "azurerm_api_management_api_policy" "example" {
-  # (resource arguments)
-}

@@ -22,6 +22,7 @@ resource "azurerm_api_management_api" "api-model" {
   service_url           = "https://${var.AZURE_APIM_PREFIX}-${var.SUFFIX}.azure-api.net"
   subscription_required = true
 
+
   subscription_key_parameter_names {
     header = "Api-Key"
     query  = "subscription-key"
@@ -30,6 +31,8 @@ resource "azurerm_api_management_api" "api-model" {
   import {
     content_format = "openapi"
     content_value  = file("AzureOpenAI-2023-03-15-preview-inference.json")
+    
+    
   }
   depends_on = [azurerm_cognitive_deployment.model]
 }
@@ -38,11 +41,19 @@ resource "azurerm_api_management_product" "openai-product" {
   product_id            = "openai-product"
   resource_group_name   = var.RGNAME
   api_management_name   = var.APIMNGNAME
+
   display_name          = "openai-product"
   description           = "openai-product"
   subscription_required = true
   approval_required     = false
   published             = true
+}
+
+resource "azurerm_api_management_product_api" "openai-product-api" {
+  api_name            = azurerm_api_management_api.api-model.name
+  product_id          = azurerm_api_management_product.openai-product.product_id
+  api_management_name = var.APIMNGNAME
+  resource_group_name = var.RGNAME
 }
 
 resource "azurerm_api_management_subscription" "openai-subscription" {
@@ -53,19 +64,16 @@ resource "azurerm_api_management_subscription" "openai-subscription" {
   allow_tracing = false
 }
 
+
 resource "azurerm_api_management_api_policy" "api_policy" {
   api_name            = azurerm_api_management_api.api-model.name
   api_management_name = var.APIMNGNAME
   resource_group_name = var.RGNAME
-  
-  xml_content = <<XML
-
+  xml_content = <<-XML
 <policies>
     <inbound>
         <base />
-        <set-header name="api-key" exists-action="override">
-            <value>{{openai-key}}</value>
-        </set-header>
+        <authentication-managed-identity resource="https://cognitiveservices.azure.com" />
     </inbound>
     <backend>
         <base />
