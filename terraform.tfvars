@@ -10,7 +10,7 @@ AZURE_ENV      = "rec"
 AZURE_APP_NAME = "openai"
 AZURE_DEP      = "daei-di01"
 
-COMPANY       = "ARKEA"
+COMPANY       = "COMPANY"
 COMPANY-EMAIL = "benjamin.bernard@arkea.com"
 
 # Prefix definition
