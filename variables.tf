@@ -1,3 +1,4 @@
+# Prefix used as define by MS as an example in their Cloud Adoption Framework. https://learn.microsoft.com/fr-fr/azure/cloud-adoption-framework/ready/azure-best-practices/resource-abbreviations
 
 variable "AZURE_REGION" {
   type        = string
