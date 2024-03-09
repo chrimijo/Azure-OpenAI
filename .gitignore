@@ -1,7 +1,7 @@
 # Local .terraform directories
 **/.terraform/*
 
-# Variables data too closed to my customer
+# Variables data too closed to my customers
 terraform.tfvars
 
 # .tfstate files
