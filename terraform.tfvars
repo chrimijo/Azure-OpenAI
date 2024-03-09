@@ -9,7 +9,6 @@ AZURE_REGION   = "francecentral"
 AZURE_ENV      = "rec"
 AZURE_APP_NAME = "openai"
 AZURE_DEP      = "daei-di01"
-AZURE_PO       = "CJO"
 
 COMPANY       = "ARKEA"
 COMPANY-EMAIL = "benjamin.bernard@arkea.com"
@@ -30,10 +29,8 @@ AZURE_CD_PREFIX    = "cd"    # cognitive Deployement
 AZURE_PL_PREFIX    = "pl"    # Private Link
 AZURE_APIM_PREFIX  = "apim"  # API Management
 AZURE_API_PREFIX   = "api"   # API Management
-AZURE_NW_PREFIX    = "nw"
 
 # to build suffix for all ressources search for "suffix" in vars.tf
 
 
 # Prefix used as define by MS as an example in their Cloud Adoption Framework. https://learn.microsoft.com/fr-fr/azure/cloud-adoption-framework/ready/azure-best-practices/resource-abbreviations
-

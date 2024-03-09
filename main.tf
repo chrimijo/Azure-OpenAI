@@ -12,15 +12,14 @@ terraform {
     container_name       = "tfstate"
     key                  = "openai-rec.tfstate"
   }
-  required_version = ">= 1.1.0"
+  required_version = ">=1.7.4"
 }
 
 provider "azurerm" {
   features {}
 }
 
+
 /* module "deploy-openai-model-2-apim " {
   source = "./modules/deploy-openai-model-2-apim"
-
-  
 } */
