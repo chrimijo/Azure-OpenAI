@@ -1,5 +1,5 @@
 module "deploy-openai-model-2-apim" {
-  source = "./modules/deploy-openaimodel-and-api"
+  source  = "./modules/deploy-openaimodel-and-api"
   version = "0.0.1"
 
   AZURE_CD_PREFIX   = var.AZURE_CD_PREFIX
