@@ -12,13 +12,15 @@ resource "azurerm_cognitive_deployment" "model" {
   }
 }
 
+
+
 # Deploy API to the model using an XML files get on 
 resource "azurerm_api_management_api" "api-model" {
-  name                  = "${var.AZURE_API_PREFIX}-openai-${replace(var.GPTMODEL,"-","")}-${replace(var.GPTVERSION,"-","")}"
+  name                  = "${var.AZURE_API_PREFIX}-${replace(var.GPTMODEL,"-","")}${replace(var.GPTVERSION,"-","")}-${trim(var.API_DEF_FILE_NAME,"AzureOpenAI-.json")}"
   resource_group_name   = var.RGNAME
   api_management_name   = var.APIMNGNAME
   revision              = "1"
-  display_name          = "${var.AZURE_API_PREFIX}-openai-${replace(var.GPTMODEL,"-","")}-${replace(var.GPTVERSION,"-","")}"
+  display_name          = "${var.AZURE_API_PREFIX}-${replace(var.GPTMODEL,"-","")}${replace(var.GPTVERSION,"-","")}-${trim(var.API_DEF_FILE_NAME,"AzureOpenAI-.json")}"
   protocols             = ["https"]
   service_url           = "${var.OPENAI_URL}openai"
   path                  = "openai"
@@ -32,37 +34,39 @@ resource "azurerm_api_management_api" "api-model" {
     content_format = "openapi"
     content_value  = file("./api-definitions-files/${var.API_DEF_FILE_NAME}")
   }
-
   depends_on = [azurerm_cognitive_deployment.model]
 }
 
-#Create a Product in APIM 
-resource "azurerm_api_management_product" "openai-product" {
-  product_id            = "openai-product-${replace(var.GPTMODEL,"-","")}-${replace(var.GPTVERSION,"-","")}"
-  resource_group_name   = var.RGNAME
-  api_management_name   = var.APIMNGNAME
-  display_name          = "openai-product-${replace(var.GPTMODEL,"-","")}-${replace(var.GPTVERSION,"-","")}"
-  description           = "openai-product-${replace(var.GPTMODEL,"-","")}-${replace(var.GPTVERSION,"-","")}"
-  subscription_required = true
-  approval_required     = false
-  published             = true
-}
-#Associate Product with the current OpenAI API
-resource "azurerm_api_management_product_api" "openai-product-api" {
-  api_name            = azurerm_api_management_api.api-model.name
-  product_id          = azurerm_api_management_product.openai-product.product_id
-  api_management_name = var.APIMNGNAME
-  resource_group_name = var.RGNAME
-}
 
 #Create Subscription with the current OpenAI API
 resource "azurerm_api_management_subscription" "openai-subscription" {
   resource_group_name = var.RGNAME
   api_management_name = var.APIMNGNAME
   product_id          = azurerm_api_management_product.openai-product.id
-  display_name        = "openai-subscription-key-${replace(var.GPTMODEL,"-","")}-${replace(var.GPTVERSION,"-","")}"
-
+  display_name        = "subk-${replace(var.GPTMODEL,"-","")}-${replace(var.GPTVERSION,"-","")}-${trim(var.API_DEF_FILE_NAME,"AzureOpenAI-.json")}"
+  state               = "active"
   allow_tracing       = false
+}
+
+
+#Create a Product in APIM 
+resource "azurerm_api_management_product" "openai-product" {
+  product_id            = "prdt-${replace(var.GPTMODEL,"-","")}-${replace(var.GPTVERSION,"-","")}-${trim(var.API_DEF_FILE_NAME,"AzureOpenAI-.json")}"
+  resource_group_name   = var.RGNAME
+  api_management_name   = var.APIMNGNAME
+  display_name          = "prdt-${replace(var.GPTMODEL,"-","")}-${replace(var.GPTVERSION,"-","")}-${trim(var.API_DEF_FILE_NAME,"AzureOpenAI-.json")}"
+  description           = "prdt-${replace(var.GPTMODEL,"-","")}-${replace(var.GPTVERSION,"-","")}-${trim(var.API_DEF_FILE_NAME,"AzureOpenAI-.json")}"
+  subscription_required = true
+  approval_required     = false
+  published             = true
+}
+
+#Associate Product with the current OpenAI API
+resource "azurerm_api_management_product_api" "openai-product-api" {
+  api_name            = azurerm_api_management_api.api-model.name
+  product_id          = azurerm_api_management_product.openai-product.product_id
+  api_management_name = var.APIMNGNAME
+  resource_group_name = var.RGNAME
 }
 
 resource "azurerm_api_management_api_policy" "api_policy" {

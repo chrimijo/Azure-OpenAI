@@ -191,12 +191,12 @@ variable "OpenAI-Model" {
     mod1 = {
       GPTMODEL          = "gpt-35-turbo"
       GPTVERSION        = "0301"
-      API_DEF_FILE_NAME = "AzureOpenAI-2023-03-15-preview.json"
+      API_DEF_FILE_NAME = "AzureOpenAI-2024-03-01-preview.json"
     },
-    mod2 = {
+    /*     mod2 = {
       GPTMODEL          = "gpt-4"
       GPTVERSION        = "0613"
       API_DEF_FILE_NAME = "AzureOpenAI-2023-03-15-preview.json"
-    }
+    } */
   }
 }
