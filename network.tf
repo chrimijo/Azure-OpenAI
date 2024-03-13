@@ -6,7 +6,7 @@ resource "azurerm_network_security_group" "nsg" {
   name                = "${var.AZURE_NSG_PREFIX}-${local.suffix}"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
-  tags                = var.default_tags
+  tags                = var.DEFAULT_TAGS
 }
 
 resource "azurerm_virtual_network" "vnet" {
@@ -14,7 +14,7 @@ resource "azurerm_virtual_network" "vnet" {
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
   address_space       = ["10.0.0.0/16"]
-  tags                = var.default_tags
+  tags                = var.DEFAULT_TAGS
 }
 
 resource "azurerm_subnet" "sub-apim" {
@@ -40,7 +40,7 @@ resource "azurerm_public_ip" "pip-public" {
   domain_name_label   = "cma-pip"
   allocation_method   = "Static"
   sku                 = "Standard"
-  tags                = var.default_tags
+  tags                = var.DEFAULT_TAGS
 }
 
 resource "azurerm_public_ip" "pip-private" {
@@ -50,7 +50,7 @@ resource "azurerm_public_ip" "pip-private" {
   domain_name_label   = "cma-mngt"
   allocation_method   = "Static"
   sku                 = "Standard"
-  tags                = var.default_tags
+  tags                = var.DEFAULT_TAGS
 
 }
 

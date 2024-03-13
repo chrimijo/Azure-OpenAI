@@ -9,7 +9,7 @@
 resource "azurerm_private_dns_zone" "dnszone-openai" {
   name                = "privatelink.openai.azure.com"
   resource_group_name = azurerm_resource_group.rg.name
-  tags                = var.default_tags
+  tags                = var.DEFAULT_TAGS
 }
 
 resource "azurerm_private_dns_zone_virtual_network_link" "pl" {
@@ -17,7 +17,7 @@ resource "azurerm_private_dns_zone_virtual_network_link" "pl" {
   resource_group_name   = azurerm_resource_group.rg.name
   private_dns_zone_name = azurerm_private_dns_zone.dnszone-openai.name
   virtual_network_id    = azurerm_virtual_network.vnet.id
-  tags                  = var.default_tags
+  tags                  = var.DEFAULT_TAGS
 }
 
 resource "azurerm_private_endpoint" "pep" {
@@ -25,7 +25,7 @@ resource "azurerm_private_endpoint" "pep" {
   location                      = azurerm_resource_group.rg.location
   resource_group_name           = azurerm_resource_group.rg.name
   subnet_id                     = azurerm_subnet.sub-endpoint.id
-  tags                          = var.default_tags
+  tags                          = var.DEFAULT_TAGS
   custom_network_interface_name = "${var.AZURE_NIC_PREFIX}-openai-${var.AZURE_PEP_PREFIX}-${local.suffix}"
 
   private_dns_zone_group {

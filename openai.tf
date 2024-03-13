@@ -14,7 +14,7 @@ resource "azurerm_cognitive_account" "cognitive" {
   sku_name                      = "S0"
   public_network_access_enabled = false
   custom_subdomain_name         = "openai-${local.suffix}"
-  tags                          = var.default_tags
+  tags                          = var.DEFAULT_TAGS
 
   network_acls {
     default_action = "Deny"

@@ -9,13 +9,13 @@
 
 | Name | Version |
 |------|---------|
-| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | ~> 3.90.0 |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 3.90.0 |
 
 ## Modules
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_deploy-openai-model-2-apim"></a> [deploy-openai-model-2-apim](#module\_deploy-openai-model-2-apim) | ./modules/deploy-openaimodel-and-api | n/a |
+| <a name="module_deploy-openai-model-2-apim"></a> [deploy-openai-model-2-apim](#module\_deploy-openai-model-2-apim) | ./modules/deploy-openaimodel-and-api | 0.0.1 |
 
 ## Resources
 
@@ -52,19 +52,19 @@
 |------|-------------|------|---------|:--------:|
 | <a name="input_AZURE_AMPLS_PREFIX"></a> [AZURE\_AMPLS\_PREFIX](#input\_AZURE\_AMPLS\_PREFIX) | Prefix for Azure Monitor Private Link Scope object | `string` | `"ampls"` | no |
 | <a name="input_AZURE_APIM_PREFIX"></a> [AZURE\_APIM\_PREFIX](#input\_AZURE\_APIM\_PREFIX) | Prefix for Azure API Management instance | `string` | `"apim"` | no |
-| <a name="input_AZURE_API_PREFIX"></a> [AZURE\_API\_PREFIX](#input\_AZURE\_API\_PREFIX) | Prefix for API into Azure API Management instance | `string` | `"api"` | no |
+| <a name="input_AZURE_API_PREFIX"></a> [AZURE\_API\_PREFIX](#input\_AZURE\_API\_PREFIX) | Prefix for API into Azure API instance | `string` | `"api"` | no |
 | <a name="input_AZURE_APP_NAME"></a> [AZURE\_APP\_NAME](#input\_AZURE\_APP\_NAME) | Prefix for application name and must be less or equal to 6 caracters | `string` | `"openai"` | no |
-| <a name="input_AZURE_CA_PREFIX"></a> [AZURE\_CA\_PREFIX](#input\_AZURE\_CA\_PREFIX) | Prefix for Cognitive Accont object | `string` | `"ca"` | no |
+| <a name="input_AZURE_CA_PREFIX"></a> [AZURE\_CA\_PREFIX](#input\_AZURE\_CA\_PREFIX) | Prefix for Cognitive Account object | `string` | `"ca"` | no |
 | <a name="input_AZURE_CD_PREFIX"></a> [AZURE\_CD\_PREFIX](#input\_AZURE\_CD\_PREFIX) | Prefix for Cognitive Deployment | `string` | `"cd"` | no |
 | <a name="input_AZURE_DEP"></a> [AZURE\_DEP](#input\_AZURE\_DEP) | Prefix for department Owner of the OpenAI service | `string` | `"dep"` | no |
 | <a name="input_AZURE_ENV"></a> [AZURE\_ENV](#input\_AZURE\_ENV) | Prefix use to define the environment: Developpement (dev), Recette (rec) or Production (prod) | `string` | `"dev"` | no |
 | <a name="input_AZURE_LOG_PREFIX"></a> [AZURE\_LOG\_PREFIX](#input\_AZURE\_LOG\_PREFIX) | Prefix for Log Analytics Workspace object | `string` | `"vnet"` | no |
-| <a name="input_AZURE_NIC_PREFIX"></a> [AZURE\_NIC\_PREFIX](#input\_AZURE\_NIC\_PREFIX) | Prefix for Network Interface Connexion object | `string` | `"nic"` | no |
+| <a name="input_AZURE_NIC_PREFIX"></a> [AZURE\_NIC\_PREFIX](#input\_AZURE\_NIC\_PREFIX) | Prefix for Network Interface Connection object | `string` | `"nic"` | no |
 | <a name="input_AZURE_NSG_PREFIX"></a> [AZURE\_NSG\_PREFIX](#input\_AZURE\_NSG\_PREFIX) | Prefix for Network Security Group object | `string` | `"nsg"` | no |
 | <a name="input_AZURE_PEP_PREFIX"></a> [AZURE\_PEP\_PREFIX](#input\_AZURE\_PEP\_PREFIX) | Prefix for Private EndPoint object | `string` | `"pep"` | no |
 | <a name="input_AZURE_PIP_PREFIX"></a> [AZURE\_PIP\_PREFIX](#input\_AZURE\_PIP\_PREFIX) | Prefix for Public IP | `string` | `"pip"` | no |
 | <a name="input_AZURE_PL_PREFIX"></a> [AZURE\_PL\_PREFIX](#input\_AZURE\_PL\_PREFIX) | Prefix for Private Link object | `string` | `"pl"` | no |
-| <a name="input_AZURE_PSC_PREFIX"></a> [AZURE\_PSC\_PREFIX](#input\_AZURE\_PSC\_PREFIX) | Prefix for Private Service Connexion object | `string` | `"psc"` | no |
+| <a name="input_AZURE_PSC_PREFIX"></a> [AZURE\_PSC\_PREFIX](#input\_AZURE\_PSC\_PREFIX) | Prefix for Private Service Connection object | `string` | `"psc"` | no |
 | <a name="input_AZURE_REGION"></a> [AZURE\_REGION](#input\_AZURE\_REGION) | Choose the target Azure Region francecentral, westeurope, northeurope and southfrance | `string` | `"francecentral"` | no |
 | <a name="input_AZURE_REGION_TRIG"></a> [AZURE\_REGION\_TRIG](#input\_AZURE\_REGION\_TRIG) | Trigram used in the ressource name for the target Azure Region, and based on the Azure Region choosed in variable AZURE\_REGION | `map(string)` | <pre>{<br>  "francecentral": "frct",<br>  "northeurop": "neu",<br>  "southfrance": "sfr",<br>  "westeurope": "weu"<br>}</pre> | no |
 | <a name="input_AZURE_RG_PREFIX"></a> [AZURE\_RG\_PREFIX](#input\_AZURE\_RG\_PREFIX) | Prefix for Ressource Group object | `string` | `"rg"` | no |
@@ -72,8 +72,8 @@
 | <a name="input_AZURE_VNET_PREFIX"></a> [AZURE\_VNET\_PREFIX](#input\_AZURE\_VNET\_PREFIX) | Prefix for Virtual Network object | `string` | `"vnet"` | no |
 | <a name="input_COMPANY"></a> [COMPANY](#input\_COMPANY) | Company named used for the API Management deployement | `string` | `"COMPANY"` | no |
 | <a name="input_COMPANY-EMAIL"></a> [COMPANY-EMAIL](#input\_COMPANY-EMAIL) | Email named used for the API Management deployement, this email is used for notifications | `string` | `"admin@company.com"` | no |
-| <a name="input_OpenAI-Model"></a> [OpenAI-Model](#input\_OpenAI-Model) | Settings to add a API in APIM and build associate OpenAi model | `map(any)` | <pre>{<br>  "mod1": {<br>    "API_DEF_FILE_NAME": "AzureOpenAI-2023-03-15-preview.json",<br>    "GPTMODEL": "gpt-35-turbo",<br>    "GPTVERSION": "0301"<br>  },<br>  "mod2": {<br>    "API_DEF_FILE_NAME": "AzureOpenAI-2023-03-15-preview.json",<br>    "GPTMODEL": "gpt-4",<br>    "GPTVERSION": "0613"<br>  }<br>}</pre> | no |
-| <a name="input_default_tags"></a> [default\_tags](#input\_default\_tags) | Tag to be added to all Azure ressource | `map(string)` | <pre>{<br>  "Departement": "AEIS",<br>  "Environment": "Production",<br>  "ProductOwner": "CJO"<br>}</pre> | no |
+| <a name="input_DEFAULT_TAGS"></a> [DEFAULT\_TAGS](#input\_DEFAULT\_TAGS) | Tag to be added to all Azure ressource | `map(string)` | <pre>{<br>  "Departement": "AEIS",<br>  "Environment": "Production",<br>  "ProductOwner": "CJO"<br>}</pre> | no |
+| <a name="input_OpenAI-Model"></a> [OpenAI-Model](#input\_OpenAI-Model) | Settings to add a API in APIM and build associate OpenAi model | `map(any)` | <pre>{<br>  "mod1": {<br>    "API_DEF_FILE_NAME": "AzureOpenAI-2024-03-01-preview.json",<br>    "GPTMODEL": "gpt-35-turbo",<br>    "GPTVERSION": "0301"<br>  }<br>}</pre> | no |
 
 ## Outputs
 

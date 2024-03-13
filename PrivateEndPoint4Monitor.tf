@@ -16,13 +16,13 @@ resource "azurerm_private_dns_zone" "dnszone-monitor" {
   for_each            = local.private_dns_zones_names_monitor
   name                = each.value
   resource_group_name = azurerm_resource_group.rg.name
-  tags                = var.default_tags
+  tags                = var.DEFAULT_TAGS
 }
 
 resource "azurerm_monitor_private_link_scope" "ampls" {
   name                = "${var.AZURE_AMPLS_PREFIX}-monitor-${local.suffix}"
   resource_group_name = azurerm_resource_group.rg.name
-  tags                = var.default_tags
+  tags                = var.DEFAULT_TAGS
 }
 
 resource "azurerm_private_endpoint" "pepyes" {
@@ -30,7 +30,7 @@ resource "azurerm_private_endpoint" "pepyes" {
   location                      = azurerm_resource_group.rg.location
   resource_group_name           = azurerm_resource_group.rg.name
   subnet_id                     = azurerm_subnet.sub-endpoint.id
-  tags                          = var.default_tags
+  tags                          = var.DEFAULT_TAGS
   custom_network_interface_name = "${var.AZURE_NIC_PREFIX}-monitor-${var.AZURE_PEP_PREFIX}-${local.suffix}"
 
   private_dns_zone_group {

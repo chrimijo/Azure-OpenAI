@@ -11,7 +11,7 @@ resource "azurerm_api_management" "apim" {
   resource_group_name           = azurerm_resource_group.rg.name
   publisher_name                = var.COMPANY
   publisher_email               = var.COMPANY-EMAIL
-  tags                          = var.default_tags
+  tags                          = var.DEFAULT_TAGS
   sku_name                      = "Developer_1"
   public_ip_address_id          = azurerm_public_ip.pip-public.id
   public_network_access_enabled = true

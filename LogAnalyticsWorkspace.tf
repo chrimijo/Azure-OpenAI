@@ -13,7 +13,7 @@ resource "azurerm_log_analytics_workspace" "log" {
   retention_in_days          = 90
   internet_ingestion_enabled = false
   internet_query_enabled     = true
-  tags                       = var.default_tags
+  tags                       = var.DEFAULT_TAGS
 }
 
 #add query package @chrimijo

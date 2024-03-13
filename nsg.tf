@@ -17,7 +17,7 @@ resource "azurerm_network_security_group" "nsg-apim" {
   name                = "${var.AZURE_NSG_PREFIX}-apim-${local.suffix}"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
-  tags                = var.default_tags
+  tags                = var.DEFAULT_TAGS
 
   # rules for APIM in external mode
   security_rule {
@@ -148,7 +148,7 @@ resource "azurerm_network_security_group" "nsg-endpoint" {
   name                = "${var.AZURE_NSG_PREFIX}-endpoint-${local.suffix}"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
-  tags                = var.default_tags
+  tags                = var.DEFAULT_TAGS
 
   # rules for APIM in external mode
   security_rule {
