@@ -5,13 +5,6 @@ It includes the creation of a network security group (NSG), a virtual network (V
 and two subnets for the Azure API Management service and the Azure endpoint.
 */
 
-# Create a network security group (NSG) for the Azure resources
-resource "azurerm_network_security_group" "nsg" {
-  name                = "${var.AZURE_NSG_PREFIX}-${local.suffix}"
-  location            = azurerm_resource_group.rg.location
-  resource_group_name = azurerm_resource_group.rg.name
-  tags                = local.DEFAULT_TAGS
-}
 
 # Create a virtual network (VNet) for the Azure resources
 resource "azurerm_virtual_network" "vnet" {
